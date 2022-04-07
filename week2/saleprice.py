@@ -14,7 +14,7 @@ else:
     
 sales_tax = p_quan * dis_price * TAX
 total = p_quan * dis_price + sales_tax
-dis_total = (p_quan * reg_price) - total
+dis_total = (reg_price - dis_price) * p_quan
 
 print(f"{p_quan} {p_des} @ ${dis_price:,.2f} each")
 print(f"Sales Tax ${sales_tax:,.2f}")
