@@ -7,7 +7,7 @@ for letter in range(len(secretWord)):
     wordBoard.append('_')
 
 def showBoard():
-    print(''.join(wordBoard))
+    print(' '.join(wordBoard))
 
 def checkGuess(guessL):
     guessL = guessL.lower()
@@ -38,11 +38,11 @@ def guessingGame():
     while(num_of_guesses < 5):
         guessLetter = input("Guess a Letter: ").lower()
         
-        while(guessLetters.count(guessLetter) > 0):
+        while(guessLetter in guessLetters):
             guessLetter = input("Guess Another Letter: ")
         if (checkGuess(guessLetter)):
             showBoard()
-            if (split(secretWord) == wordBoard):
+            if (not '_' in wordBoard):
                 print("Congratulations, You Won!")
                 break
         else:
