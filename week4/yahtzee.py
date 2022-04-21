@@ -1,43 +1,27 @@
 import random
 dice = []
-
 class Die:
-    def __init__(self, numOfSides, value = 0):
+    SIDES = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']
+    def __init__(self, numOfSides, value = 1):
         self.numOfSides = numOfSides
         self.value = value
     def roll(self):
-        self.value = random.choice(range(1, self.numOfSides + 1))
-        return self.value
+        self.value = random.randint(1, self.numOfSides)
     def getCurrentFaceValue(self):
         return self.value
     def showDieFace(self):
-        print(self.value)
+        return Die.SIDES[self.value]
+    def __eq__(self, __o):
+        return self.value == __o.value
 
-def printDie(num):
-    match num:
-        case 1:
-            return "⚀"
-        case 2:
-            return "⚁"
-        case 3:
-            return "⚂"
-        case 4:
-            return "⚃"
-        case 5:
-            return "⚄"
-        case 6:
-            return "⚅"
-       
 def rollFive(sides1, sides2, sides3, sides4, sides5):
     global dice
-    dice = [Die(sides1).roll(), Die(sides2).roll(), Die(sides3).roll(), Die(sides4).roll(), Die(sides5).roll()]
+    dice = [Die(sides1), Die(sides2), Die(sides3), Die(sides4), Die(sides5)]
     for die in dice:
-        if all(die < 7 for die in dice):
-            print(f"{printDie(die)} ({die})", end =" ")
-        else:
-            print(f"({die})", end =" ")
+        die.roll()
+        print(f"{die.showDieFace()} ({die.getCurrentFaceValue()})", end =" ")
        
-rollFive(1, 2, 1, 1, 9)
+rollFive(1, 1, 1, 3, 1)
 
 def isYahtzee(dice) :
     if all(die == dice[0] for die in dice):
