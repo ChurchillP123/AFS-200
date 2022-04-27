@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-
 import requests
 from addressbook import Contact, AddressBook
 
@@ -42,9 +41,8 @@ def getEntries():
 
 @app.route("/search", methods = ['POST'])
 def search():
-    if request.method == 'POST':
-        search = request.form.get("search")
-        return render_template('index.html', addresses = allAddresses, search = search)
+    search = request.form.get("search")
+    return render_template('index.html', addresses = addressBook.findAllMatching(search))
 
 if __name__ == "__main__":
     app.run()
