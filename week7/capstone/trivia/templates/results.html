@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" /> -->
+    <title>Trivia Game</title>
+</head>
+<body>
+    <form action="/">
+        <h1>You got the following questions correct:</h1>
+        {% for question in questions %}
+            {% if question.getCorrectAnswer() in answers %}
+                <li>{{question.getQuestion()}}</li>
+                <p>- Correctly Answered: {{question.getCorrectAnswer()}}</p>
+            {% endif %}
+        {% endfor %} 
+        <h1>You answered the following questions incorrectly:</h1>
+        {% for question in questions %}
+            {% if question.getCorrectAnswer() not in answers %}
+                <li>{{question.getQuestion()}}</li>
+                <p>- Correct Answer is: {{question.getCorrectAnswer()}}</p>
+            {% endif %}
+        {% endfor %}
+        <button>Play Again?</button>
+    </form>
+</body>
+</html>
